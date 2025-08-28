@@ -1,0 +1,162 @@
+
+
+.toast-container {
+  right: 0.5rem;
+  top: 0.5rem;
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* spacing between toasts */
+}
+
+.toast {
+  min-width: 250px;
+  max-width: 350px;
+  padding: 12px 35px 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  position: relative;
+  animation: slideIn 0.5s ease-out;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  line-height: 1.4;
+}
+
+.toast span {
+  position: absolute;
+  right: 0.7rem;
+  cursor: pointer;
+  font-weight: bolder;
+  color: white;
+  font-size: 1.2rem;
+  top: 0.4rem;
+}
+
+.toast.hide {
+  animation: fadeOut 0.6s ease-in forwards;
+}
+
+/* Toast types */
+.toast.success {
+  background-color: #28a745; /* green */
+}
+
+.toast.info {
+  background-color: #17a2b8; /* blue */
+}
+
+.toast.warning {
+  background-color: #ffc107; /* yellow */
+  color: #000;
+}
+
+.toast.error {
+  background-color: #dc3545; /* red */
+}
+
+/* Animations */
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-10px);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+
+
+.button-box{
+  border: 6px solid;
+  padding: 2rem;
+  border-radius: 1rem;
+  border-color: #885f344f;
+  background-color: beige;
+}
+.btn-container button{
+    border:1px dooted black;
+    margin:0.5rem;
+    padding:0.5rem;
+    font-size:1rem;
+    font-weight:600;
+    border-radius:0.5rem;
+    cursor:pointer; 
+   background-color: #f2c04b;
+}
+
+.btn-container button:hover{
+    background-color: #835003f1;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.473);
+    color: #fff;
+    border: 3px solid #835003f1; 
+}
+
+
+
+
+
+
+/* Small screens */
+@media (max-width: 600px) {
+  .toast {
+    min-width: 200px;
+    max-width: 90vw; /* fit inside screen */
+    font-size: 0.85rem;
+    padding: 10px 30px 10px 12px;
+  }
+
+  .toast span {
+    font-size: 1rem;
+    right: 0.5rem;
+  }
+
+  .button-box {
+    padding: 1rem;
+  }
+
+  .btn-container button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    min-width: 100px;
+  }
+}
+
+/* Extra small (tiny phones <400px) */
+@media (max-width: 400px) {
+  .toast {
+    font-size: 0.8rem;
+    padding: 8px 28px 8px 10px;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-container button {
+    width: 100%; /* full-width buttons on tiny screens */
+    background-color: #f2c04b;
+  }
+}   
