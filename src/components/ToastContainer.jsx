@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import "../toaststyle.css";
 
-let toastId = 0; // simple unique ID generator
-
 const ToastContainer = () => {
   const [toasts, setToasts] = useState([]);
 
+  // array of toast types & messages
+  const toastOptions = [
+    { type: "success", message: "✅ Success! Operation completed." },
+    { type: "info", message: "ℹ️ FYI: Here’s some information." },
+    { type: "warning", message: "⚠️ Warning! Something looks odd." },
+    { type: "error", message: "❌ Error! Something went wrong." }
+  ];
+
   const showToast = (type, message) => {
-    const id = toastId++;
+    const id = Date.now(); // unique ID based on timestamp
+    console.log(Date.now());
+
     const newToast = { id, type, message };
 
     setToasts((prev) => [...prev, newToast]);
 
-    // auto remove after 3s
+    // auto remove after 7s
     setTimeout(() => {
       removeToast(id);
     }, 7000);
@@ -24,44 +32,21 @@ const ToastContainer = () => {
 
   return (
     <>
-    <div className="button-box">
-    <h1>React Toasts</h1>
-      <div className="container">
-        <div className="btn-container">
-          <button
-            className="btn btn-success"
-            onClick={() =>
-              showToast("success", "✅ Success! Operation completed.")
-            }
-          >
-            success toast
-          </button>
-          <button
-            className="btn btn-info"
-            onClick={() =>
-              showToast("info", "ℹ️ FYI: Here’s some information.")
-            }
-          >
-            info toast
-          </button>
-          <button
-            className="btn btn-warning"
-            onClick={() =>
-              showToast("warning", "⚠️ Warning! Something looks odd.")
-            }
-          >
-            warning toast
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={() =>
-              showToast("error", "❌ Error! Something went wrong.")
-            }
-          >
-            error toast
-          </button>
+      <div className="button-box">
+        <h1>React Toasts</h1>
+        <div className="container">
+          <div className="btn-container">
+            {toastOptions.map((toastObj) => (
+              <button
+                key={toastObj.type}
+                className={`btn btn-${toastObj.type}`}
+                onClick={() => showToast(toastObj.type, toastObj.message)}
+              >
+                {toastObj.type} toast
+              </button>
+            ))}
+          </div>
         </div>
-     </div>
 
         {/* Render all active toasts */}
         <div className="toast-container">
@@ -73,7 +58,6 @@ const ToastContainer = () => {
           ))}
         </div>
       </div>
-    
     </>
   );
 };
